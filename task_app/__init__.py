@@ -1,9 +1,12 @@
+from dotenv import load_dotenv
 from flask import Flask
+
 from .extensions import db, migrate, login_manager, csrf
 from task_app.api.routes import api_bp
 
 
 def create_app():
+    load_dotenv()
     app = Flask(__name__)
     app.config.from_object('task_app.settings.Config')
     db.init_app(app)

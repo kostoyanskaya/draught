@@ -1,79 +1,83 @@
-#  Проект: Управление пользователями
-Проект: Управление пользователями
-Этот проект представляет собой веб-приложение для управления пользователями. Он предоставляет RESTful API для регистрации, входа, выхода и получения списка пользователей. Проект использует Flask, Flask-Login, Flask-Restful и другие библиотеки для обеспечения безопасности и удобства работы с пользовательскими данными.
+#  Project: User Management
+This project is a web application for managing users. It provides a RESTful API for user registration, login, logout, and retrieving a list of users. The project uses Flask, Flask-Login, Flask-Restful, and other libraries to ensure security and ease of working with user data.
 
-### Основные возможности:
-Основные возможности:
+### Key Features:
 
-- Регистрация пользователей: Пользователи могут зарегистрироваться, указав свои данные (логин, пароль, пол, дату рождения и т.д.).
+- User Registration: Users can register by providing their data (username, password, gender, date of birth, etc.).
 
-- Вход в систему: Пользователи могут войти в систему, используя свои учётные данные.
+- User Login: Users can log in using their credentials.
 
-- Выход из системы: Пользователи могут выйти из системы.
+- User Logout: Users can log out of the system.
 
-- Получение CSRF-токена: Для защиты от CSRF-аток.
+- CSRF Token Retrieval: For protection against CSRF attacks.
 
-- Просмотр списка пользователей: Администраторы могут просматривать список всех зарегистрированных пользователей
+- User List Retrieval: Administrators can view a list of all registered users.
 
 
-### В проекте используются  основные следующие технологии и библиотеки:
-
-Flask (==2.0.2): Легковесный веб-фреймворк на Python, который обеспечивает простоту и гибкость разработки веб-приложений.
-
-Flask-SQLAlchemy (==2.5.1): Расширение для Flask, которое помогает интегрировать ORM (Object Relational Mapping) в приложения на Python, упрощая работу с базами данных.
-
-Flask-Login (==0.6.3): Библиотека для управления сессиями пользователей, обеспечивающая функциональность входа и выхода.
-
-Flask-WTF (==1.0.0): Расширение для Flask, предоставляющее интеграцию с библиотеками для обработки форм, включая защиту от CSRF-атак.
-
-Flask-Bcrypt (==1.0.1): Библиотека для хеширования паролей, обеспечивающая защиту конфиденциальной информации пользователей.
-
-marshmallow (==3.23.2): Библиотека для сериализации и десериализации объектов, позволяющая легко обмениваться данными между приложением и клиентом.
-
-PostgreSQL: Реляционная система управления базами данных (СУБД), которая используется в проекте для надёжного хранения и управления данными пользователей.
+### Technologies and Libraries Used:
 
 
-## Установка проекта на удаленном сервере:
+Flask (==2.0.2): A lightweight web framework for Python that provides simplicity and flexibility for web application development.
 
-1. Клонирование репозитория
+Flask-SQLAlchemy (==2.5.1): A Flask extension that integrates ORM (Object Relational Mapping) into Python applications, simplifying database interactions.
+
+Flask-Login (==0.6.3): A library for managing user sessions, providing login and logout functionality.
+
+Flask-WTF (==1.0.0): A Flask extension that integrates form handling libraries, including CSRF protection.
+
+Flask-Bcrypt (==1.0.1): A library for password hashing, ensuring the security of user credentials.
+
+marshmallow (==3.23.2): A library for object serialization and deserialization, enabling easy data exchange between the application and the client.
+
+PostgreSQL: A relational database management system (RDBMS) used in the project for reliable storage and management of user data.
+
+
+## Installing a project:
+
+1. Clone the Repository:
 ```
-git@github.com:kostoyanskaya/fitness.git
-```
+git clone https://github.com/kostoyanskaya/draught.git
 
-2. Переход в директорию device
+or
 
-```
-cd device
+git clone git@github.com:kostoyanskaya/draught.git
 ```
 
-3. Создание виртуального окружения
+2. Navigate to the Project Directory:
+
+```
+cd draught
+```
+
+3. Create a Virtual Environment:
 
 ```
 python -m venv venv
 ```
 
-4. Активация виртуального окружения
+4. Activate the Virtual Environment:
 
 ```
 source venv/Scripts/activate
 ```
 
-5. Обновите pip
+5. Upgrade pip:
 
 ```
 python -m pip install --upgrade pip
 ```
 
-6. Установка зависимостей
+6. Install Dependencies:
 
 ```
 pip install -r requirements.txt
 ```
 
-7. Нужно создать фаил .env
+7. Create a .env File:
+"It is not necessary to do this; SQLite is connected by default."
 
-8. Заполнить по примеру
-
+8. Create a .env file in the project root directory and fill it as follows:
+"It is not necessary to do this; SQLite is connected by default."
 ```
 FLASK_APP=task_app
 FLASK_DEBUG=1
@@ -81,7 +85,7 @@ DATABASE_URI=postgresql://username:password@localhost:5432/database_name
 SECRET_KEY=YOUR_SECRET_KEY
 ```
 
-9. Выполнить команды:
+9. Run the Following Commands:
 ```
 python migrate.py init
 python migrate.py migrate "Text"
@@ -89,32 +93,38 @@ python migrate.py upgrade
 
 ```
 
-10. Запустить сайт:
+10. Start the Application:
 
 ```
 python run.py
 ```
 
-## Пример запросов:
+## Example Requests:
 
 ```
-Метод: GET
+Method: GET
 
-Получение CSRF-токена:
+Retrieve CSRF Token:
 URL: http://127.0.0.1:5000/api/get_csrf
 ```
 
-```
-Метод: GET
+## Include the CSRF Token in Requests:
+For every subsequent request (e.g., registration, login, logout), include the CSRF token in the request headers. The token should be passed in the X-CSRF-TOKEN header.
 
-Получение списка пользователей:
+
+```
+Method: GET
+
+Retrieve User List:
 URL: http://127.0.0.1:5000/api/get_users
 ```
 
 
 
 ```
-http://127.0.0.1:5000/api/register
+Method: POST
+
+http://127.0.0.1:5000/api/register_user
 ```
 body:
 ```
@@ -126,15 +136,29 @@ body:
     "birth_date": "1990-01-01"
 }
 ```
+```
+Method: POST
+
+http://127.0.0.1:5000/api/login_user
+```
+body:
+```
+{
+    "username": "testuser",
+    "password": "testpassword"
+}
+```
+
+
 
 ```
-Метод: POST
+Method: POST
 
-Выход пользователя:
-URL: http://127.0.0.1:5000/api/logout
+User Logout:
+URL: http://127.0.0.1:5000/api/logout_user
 ```
 
-Метод: POST
 
-## Автор
+
+## author
 #### [_Виктория_](https://github.com/kostoyanskaya/)
