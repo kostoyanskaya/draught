@@ -42,6 +42,12 @@ class LoginUser(Resource):
         validated_data = schema.load(data)
         username = validated_data['username']
         password = validated_data['password']
+
+        if current_user.is_authenticated:
+            if current_user.username == username:
+                return {'message': 'You are already logged.'}, 409
+            return {'message': 'Please logout first.'}, 403
+
         user = UserService.api_login_user(username, password)
         if user:
             login_user(user)
@@ -52,6 +58,8 @@ class LoginUser(Resource):
 class LogoutUser(Resource):
     def post(self):
         """User logout."""
+        if not current_user.is_authenticated:
+            return {'message': 'You are already logged out'}, 400
         logout_user()
         return {'message': 'Logout successful'}, 200
 
